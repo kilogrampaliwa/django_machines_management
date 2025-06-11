@@ -46,6 +46,7 @@ INSTALLED_APPS = [
     # Custom applications
     'index_page',  # Application for the index page
     'accounts',  # Application for user accounts
+    'dashboard',  # Application for the dashboard
 ]
 
 MIDDLEWARE = [
