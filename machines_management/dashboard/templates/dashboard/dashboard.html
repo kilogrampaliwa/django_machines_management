@@ -1,0 +1,15 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="container py-4">
+    <h2 class="mb-4">Main Panel</h2>
+
+
+    {% include "catalog_list.html" with title="Mechines" items=machines %}
+
+
+    <div class="mt-5">
+        <h4 class="text-muted">Site in progress</h4>
+    </div>
+</div>
+{% endblock %}
