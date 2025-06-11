@@ -1,0 +1,16 @@
+{% extends 'base.html' %}
+
+{% block title %}Index Page{% endblock %}
+
+{% block content %}
+<h1>Welcome!</h1>
+<p>This is the Machines Management app.</p>
+<p>Please log in to continue.</p>
+<a href="{% url 'login' %}">
+    <button type="button">Login</button>
+</a>
+<p>If you don't have an account, please register and contact your system administrator.</p>
+<a href="{% url 'register' %}">
+    <button type="button">Register</button>
+</a>
+{% endblock %}
