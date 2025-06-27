@@ -30,7 +30,7 @@ def dashboard(request):
 @login_required
 def machineForm(request):
     if request.method == "POST":
-        form = MachineForm(request.POST)
+        form = MachineForm(request.POST, user=request.user)
         if form.is_valid():
             machine = form.save(commit=False)
             machine.user = request.user

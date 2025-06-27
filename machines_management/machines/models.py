@@ -10,8 +10,12 @@ class Machine(models.Model):
     machine_location = models.CharField(max_length=100)
     machine_description = models.TextField(blank=False, null=False)
 
+    class Meta:
+        constraints = [
+            models.UniqueConstraint(fields=['user', 'machine_name'], name='unique_machine_per_user')
+        ]
     def __str__(self):
-        return self.machine_name
+        return f"{self.machine_name} ({self.user.username})"
 
 class SensorData(models.Model):
     """

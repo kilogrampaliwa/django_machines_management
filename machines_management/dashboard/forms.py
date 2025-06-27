@@ -6,6 +6,15 @@ class MachineForm(forms.ModelForm):
         model = Machine
         fields = ['machine_name', 'machine_description', 'machine_location']
 
+    def __init__(self, *args, **kwargs):
+        self.user = kwargs.pop('user', None)
+        super().__init__(*args, **kwargs)
+
+    def clean_machine_name(self):
+        name = self.cleaned_data['machine_name']
+        if self.user and Machine.objects.filter(user=self.user, machine_name=name).exists():
+            raise forms.ValidationError("You already have a machine with this name.")
+        return name
 
 class SensorForm(forms.ModelForm):
     class Meta:
