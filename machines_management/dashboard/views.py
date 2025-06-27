@@ -1,5 +1,7 @@
 from django.shortcuts import render
 from django.contrib.auth.decorators import login_required
+from django.shortcuts import get_object_or_404
+from machines.models import Machine, Sensor
 from .forms import MachineForm
 from django.http import JsonResponse
 # Create your views here.
@@ -9,6 +11,7 @@ def dashboard(request):
     machines_qs = request.user.machines.all()
     machines = [
         {
+            "id": machine.id,
             "name": machine.machine_name,
             "description": machine.machine_description,
             "details": [
@@ -22,6 +25,7 @@ def dashboard(request):
         'machines': machines,
         'parts': parts,
     })
+
 
 @login_required
 def machineForm(request):
@@ -37,3 +41,11 @@ def machineForm(request):
     else:
         form = MachineForm()
         return render(request, 'forms/machine_form.html', {'form': form})
+
+def machineDetail(request, pk):
+    machine = get_object_or_404(Machine, pk=pk)
+    sensors = Sensor.objects.filter(machine=machine)
+    return render(request, 'dashboard/partials/machine_detail.html', {
+        'machine': machine,
+        'sensors': sensors
+    })

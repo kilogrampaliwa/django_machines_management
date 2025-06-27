@@ -4,7 +4,8 @@
 <div class="container py-4">
     <h2 class="mb-4">Main Panel</h2>
 
-    {% include "dashboard/partials/catalog_list.html" with title="Machines" items=machines %}
+    {% include "dashboard/partials/catalog_list.html" with title="Machines" items=machines row_template="dashboard/partials/machine_row.html" %}
+
 
     <button type="button" class="btn btn-success" onclick="openMachineModal()">
       Add machine
