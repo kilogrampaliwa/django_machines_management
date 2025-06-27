@@ -47,6 +47,7 @@ INSTALLED_APPS = [
     'index_page',  # Application for the index page
     'accounts',  # Application for user accounts
     'dashboard',  # Application for the dashboard
+    'machines',  # Application for machine management
 ]
 
 MIDDLEWARE = [
@@ -137,7 +138,9 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.2/howto/static-files/
 
 STATIC_URL = 'static/'
-
+STATICFILES_DIRS = [
+    BASE_DIR /"dashboard" / "static",
+]
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.2/ref/settings/#default-auto-field
 

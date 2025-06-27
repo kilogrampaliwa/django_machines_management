@@ -4,12 +4,41 @@
 <div class="container py-4">
     <h2 class="mb-4">Main Panel</h2>
 
-
     {% include "dashboard/partials/catalog_list.html" with title="Machines" items=machines %}
 
+    <button type="button" class="btn btn-success" onclick="openMachineModal()">
+      Add machine
+    </button>
 
+    <!-- ============================= Modal for adding a new machine ========================================= -->
+    <div id="machineFormModal" tabindex="-1" aria-hidden="true">
+      <div>
+        <div style="display:flex; justify-content:space-between; align-items:center; margin-bottom:10px;">
+          <h5 class="modal-title">Add Machine</h5>
+          <button type="button" onclick="closeModal()" style="background:none; border:none; font-size:20px; cursor:pointer;">&times;</button>
+        </div>
+        <div id="machineFormBody">
+          <div class="text-center"></div>
+        </div>
+      </div>
+    </div>
+    <!-- ====================================================================================================== -->
+
+    {% include "dashboard/partials/catalog_list.html" with title="Parts" items=parts %}
     <div class="mt-5">
         <h4 class="text-muted">Site in progress</h4>
     </div>
 </div>
+
+
+    <!-- ============================Button scripts for modal handling ======================================== -->
+    {% load static %}
+    
+    <script>
+      const machineFormUrl = "{% url 'machine_form' %}";
+    </script>
+    <script src="{% static 'dashboard/dashboard.js' %}"></script>
+
+    <!-- ====================================================================================================== -->
+
 {% endblock %}
