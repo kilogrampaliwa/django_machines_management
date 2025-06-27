@@ -6,7 +6,17 @@ from django.http import JsonResponse
 
 @login_required
 def dashboard(request):
-    machines = request.user.machines.all()
+    machines_qs = request.user.machines.all()
+    machines = [
+        {
+            "name": machine.machine_name,
+            "description": machine.machine_description,
+            "details": [
+                f"Location: {machine.machine_location}",
+            ],
+        }
+        for machine in machines_qs
+    ]
     parts = []
     return render(request, 'dashboard/dashboard.html', {
         'machines': machines,
