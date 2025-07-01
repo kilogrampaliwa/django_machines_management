@@ -1,0 +1,6 @@
+<form id="surveyForm" action="{% url 'sensor_form' machine.id %}">
+  {% csrf_token %}
+  {{ form.as_p }}
+  <button type="submit" class="btn btn-primary">Submit</button>
+  <button type="button" class="btn btn-secondary" onclick="closeAddSensorModal()">Close</button>
+</form>

@@ -20,3 +20,16 @@ class SensorForm(forms.ModelForm):
     class Meta:
         model = Sensor
         fields = ['sensor_name', 'sensor_type', 'sensor_description', 'machine']
+        widgets = {
+            'machine': forms.HiddenInput()
+        }
+
+    def clean(self):
+        cleaned_data = super().clean()
+        name = cleaned_data.get('sensor_name')
+        machine = cleaned_data.get('machine')
+
+        if name and machine and Sensor.objects.filter(machine=machine, sensor_name=name).exists():
+            self.add_error('sensor_name', 'This sensor name already exists for this machine.')
+
+        return cleaned_data

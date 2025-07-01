@@ -4,10 +4,8 @@
 
   <h6>Sensors:</h6>
   <ul class="mb-0">
-    {% for sensor in sensors %}
-      <li>{{ sensor.name }} – {{ sensor.description }}</li>
-    {% empty %}
-      <li class="text-muted">No sensors assigned.</li>
-    {% endfor %}
+    {% include "dashboard/partials/catalog_list.html" with title="Sensors" items=sensors %}
   </ul>
+  <button onclick="openAddSensorModal({{ machine.id }})">Add Sensor</button>
+  {% include "dashboard/partials/modal_add_sensor.html" %}
 </div>
